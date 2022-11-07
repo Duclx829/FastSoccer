@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="shortcut icon" href="img/logo.jpg">
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/login.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/notify.js"></script>
+</head>
+<body>
+<header id="header" style="height: 0 !important;"></header>
+<div class="parent clearfix">
+    <div class="bg-illustration">
+        <a href="index.html"><img src="img/logo.jpg" alt="logo"></a>
+
+        <div class="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+    <div class="login">
+        <div class="container">
+            <h1 style="color: #ffc107">Đăng ký</h1>
+            <br>
+            <h2>Đã có tài khoản? <a th:href="@{/loadFormLogin}">Đăng nhập</a></h2>
+            <div class="login-form">
+                <p style="color: red; margin: 5px;" th:text="${session.message}"
+                   th:unless="${session == null}">[...]</p>
+                <script th:if="${session.message}">
+                    showNotify("Đăng ký không thành công!", "alert-danger");
+                    setTimeout(function (){
+                            $.ajax({
+                                url: "/api/removeMessage",
+                                type: "post",
+                                success: function (data) {
+                                    if (document.getElementById("message-container") != undefined) {
+                                        console.log("remove session");
+                                        document.getElementById("message-container").parentNode.removeChild(document.getElementById("message-container"));
+                                    }
+                                }
+                            });
+                    }, 3000);
+                </script>
+                <form id="form-register" th:action="@{/process_register}" class="form form-inline" th:object="${user}"
+                      method="post" autocomplete="off" onsubmit="validateForm()">
+                    <div class="form-group mb-4">
+                        <!--                        th:field="*{fullname}"-->
+                        <input id="name" class="form-control w-100" type="text" th:field="*{fullName}"
+                               placeholder="Họ & tên" maxlength="40" autocomplete="new-password">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input id="phone" class="form-control w-100" th:field="*{username}" type="text"
+                               placeholder="Số điện thoại" autocomplete="new-password">
+                        <div class="input-error-message"></div>
+                    </div>
+
+                    <div class="form-group mb-4 position-relative">
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        <input id="password" class="form-control w-100 pr-5" type="password" th:field="*{password}"
+                               placeholder="Mật khẩu" autocomplete="new-password">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="form-group position-relative">
+                        <span toggle="#re-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        <input id="re-password" class="form-control w-100 pr-5" type="password"
+                               placeholder="Nhập lại mật khẩu">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/js/scripts.js"></script>
+<script>
+    function validateForm() {
+        return true;
+    }
+
+    Validator({
+        form: '#form-register',
+        rules: [
+            Validator.isRequired('#name', 'Vui lòng nhập họ tên.'),
+            Validator.isName('#name','Tên không được chứa ký tự đặc biệt hoặc số'),
+            Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại.'),
+            Validator.isPhone('#phone', 'Số điện thoại không hợp lệ.'),
+            Validator.isRequired('#password', 'Vui lòng nhập mật khẩu.'),
+            // Validator.isRequired('#re-password', 'Vui lòng nhập mật khẩu xác nhận.'),
+            Validator.isPassword('#password', 'Mật khẩu tối thiểu 8 ký tự và có chứa chữ hoa, chữ thường và số.'),
+            Validator.isMatch('#re-password', function () {
+                return $('#form-register #password').val();
+            }, 'Mật khẩu xác nhận không trùng khớp.')
+        ]
+    });
+</script>
+</body>
+</html>

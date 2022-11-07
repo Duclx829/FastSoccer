@@ -1,0 +1,33 @@
+#search-form input,
+#search-form input:focus {
+    border-color: #ced4da;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    transition: all .15s ease-in-out;
+}
+#search-form input{
+    cursor: pointer;
+}
+#search-form input[name="search"]:focus {
+    box-shadow: inset 0 0 8px #dcdcdc;
+}
+
+
+.dropdown li{
+    cursor: pointer;
+    transition: background-color .15s ease-in-out;
+}
+.dropdown{
+    cursor: pointer;
+}
+
+.dropdown:hover ul{
+    display: block;
+}
+.dropdown li:hover{
+    background-color: #dbdbdb;
+}
+
+.pricing .card{
+    box-shadow: 0 0 1rem rgb(0 0 0 / 15%) ;
+}

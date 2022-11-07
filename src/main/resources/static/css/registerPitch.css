@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+}
+
+.tab {
+    font-size: 1.25rem;
+    display: none;
+    width: 100%;
+    height: 50%;
+    margin: 0px auto;
+    transition: opacity 1s ease-out;
+    /*opacity: 0;*/
+    /*height: 0;*/
+    /*overflow: hidden;*/
+    /*transition: all 1s ease-in-out;*/
+
+}
+
+.current {
+    display: block;
+
+    /*opacity: 1;*/
+    /*height: auto;*/
+}
+
+.from-left .row{
+    -webkit-animation: slide-from-left .2s;
+    animation: slide-from-left .2s;
+}
+
+.from-right .row{
+    -webkit-animation: slide-from-right .2s;
+    animation: slide-from-right .2s;
+}
+
+@-webkit-keyframes slide-from-left {
+    from { transform: translateX(-100%) }
+    to { transform: translateX(0%) }
+}
+@keyframes slide-from-left {
+    from { transform: translateX(-100%) }
+    to { transform: translateX(0%) }
+}
+
+@-webkit-keyframes slide-from-right {
+    from { transform: translateX(100%) }
+    to { transform: translateX(0%) }
+}
+@keyframes slide-from-right {
+    from { transform: translateX(100%) }
+    to { transform: translateX(0%) }
+}
+
+body {
+    background-color: #f1f1f1;
+}
+
+form {
+    background-color: #ffffff;
+    margin: 100px auto;
+    font-family: "Raleway", sans-serif;
+    padding: 40px;
+    padding-bottom: 20px;
+    width: 40%;
+    min-width: 300px;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+h2 {
+    text-align: center;
+    color: #4CAF50;
+    text-transform: uppercase;
+
+}
+
+.title {
+    color: #000000;
+    font-size: 75px;
+}
+
+textarea {
+    padding: 10px;
+    height: 12em !important;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.previous {
+    background-color: #bbbbbb;
+}
+
+.previous:hover{
+    opacity: 1;
+    background-color: #4CAF50;
+}
+
+
+.next {
+    float: right;
+}
+
+.submit {
+    float: right;
+    background-color: #f44336;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    display: block;
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+    margin: auto .3em;
+    cursor: pointer;
+    border: 0;
+    background-color: #c5c5c5;
+    border-radius: 50%;
+    transition: all ease-in-out .25s;
+
+}
+
+.step.active {
+    border: 3px solid #6dc66d;
+    box-shadow: 0 0 10px #047804;
+}
+
+.step.finish {
+    background-color: #4CAF50;
+}
+
+.error {
+    color: #f00;
+}
+
+.error + label{
+    font-size: .8em;
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+.tab img {
+    width: 100%;
+    display: none;
+    margin-top: 10px;
+}
+.outline-none,
+.outline-none:focus{
+    outline: none !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}

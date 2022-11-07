@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+
+<div class="ticket">
+    <div class="left">
+        <div class="image" style="background-image: url('https://cdn.pixabay.com/photo/2014/10/14/20/24/ball-488718_1280.jpg')">
+            <p class="admit-one" style="overflow: hidden">
+                <span th:text="${booking.getUserId().getUsername()}"></span>
+                <span th:text="${booking.getUserId().getUsername()}"></span>
+                <span th:text="${booking.getUserId().getUsername()}"></span>
+            </p>
+            <div class="ticket-number">
+                <p th:text="'#'+${booking.getId()}">
+
+                </p>
+            </div>
+        </div>
+        <div class="ticket-info">
+            <p class="date">
+               <!-- <span>TUESDAY</span>-->
+                <span id="dateB" class="june-29" th:text="${booking.getDateBooking()}"></span>
+               <!-- <span>2021</span>-->
+
+            </p>
+            <div class="show-name">
+                <h1 th:text="${booking.getPriceYardID().getYardId().getOwnPitch().getNamePitch()}"></h1>
+                <h2 th:text="${booking.getPriceYardID().getYardId().getName()}"></h2>
+            </div>
+            <div class="time">
+                <p th:text="${booking.getPriceYardID().getStartTime()}+'-'+${booking.getPriceYardID().getEndTime()}"></p>
+                <p th:text="${booking.getPriceYardID().getPrice()}+' VND'"></p>
+            </div>
+            <p class="location"><span ></span>
+                <span class="separator"><i class="far fa-smile"></i></span><span th:text="${booking.getPriceYardID().getYardId().getOwnPitch().getAddress()}"></span>
+            </p>
+        </div>
+    </div>
+    <div class="right">
+       <!-- <p class="admit-one">
+            <span>ADMIT ONE</span>
+            <span>ADMIT ONE</span>
+            <span>ADMIT ONE</span>
+        </p>-->
+        <div class="right-info-container">
+            <div class="show-name">
+<!--                <h1>QR CODE</h1>-->
+            </div>
+            <!--<div class="time">
+                <p>8:00 PM <span>TO</span> 11:00 PM</p>
+                <p>DOORS <span>@</span> 7:00 PM</p>
+            </div>-->
+            <div class="barcode">
+<!--                <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">-->
+            </div>
+            <a th:href="|/showDetail?id=${booking.getPriceYardID().getYardId().getOwnPitch().getId()}|">Quay về sân</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

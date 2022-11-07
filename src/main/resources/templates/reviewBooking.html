@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Chi tiết sân</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/img/logo.jpg" rel="icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!--Important link from https://bootsnipp.com/snippets/XqvZr-->
+    <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!--  <script src="src/main/resources/static/js/jquery-3.6.0.min.map"></script>-->
+    <!--    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+</head>
+
+<body>
+<!-- ======= Header ======= -->
+<header id="header" th:insert="header.html"></header>
+    <!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<!-- <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+    </div>
+</section> -->
+<!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Details Section ======= -->
+    <section>
+        <div class="pd-wrap">
+            <div class="container">
+                <div class="heading-section">
+                    <h2>Chi tiết sân</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="slider" class="owl-carousel product-slider">
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img1}|"/>
+                            </div>
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img2}|"/>
+                            </div>
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img3}|"/>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="thumb" class="owl-carousel product-thumb">
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img1}|"/>
+                            </div>
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img2}|"/>
+                            </div>
+                            <div class="item">
+                                <img th:src="|@{upload/}*{ownPitch.img3}|"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-dtl">
+                            <div class="product-info">
+                                <div class="product-name" th:text="'Sân: '+${ownPitch.getNamePitch()}"></div>
+                               <!-- <div class="reviews-counter">
+                                   &lt;!&ndash; <div class="rate">
+                                        <input type="radio" id="star5" name="rate" value="5"/>
+                                        <label for="star5"></label>
+                                        <input type="radio" id="star4" name="rate" value="4"/>
+                                        <label for="star4"></label>
+                                        <input type="radio" id="star3" name="rate" value="3"/>
+                                        <label for="star3"></label>
+                                        <input type="radio" id="star2" name="rate" value="2"/>
+                                        <label for="star2"></label>
+                                        <input type="radio" id="star1" name="rate" value="1"/>
+                                        <label for="star1"></label>
+
+                                    </div>
+                                    <span>3 Đánh giá</span>&ndash;&gt;
+                                </div>-->
+                                <div class="product-price-discount"><span id="price">Gía: 0</span></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <label for="yard">Chọn sân</label>
+                                    <select id="yard" name="yard" class="form-control form-select"
+                                            th:onchange="getIdYard()">
+                                        <option th:each="yard : ${yardList}"
+                                                th:value="${yard.getId()}"
+                                                th:text="${yard.getName()}"
+                                        ></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <form id="booking-form" th:action="@{/booking}" method="post">
+                                <label>Chọn lịch</label>
+                                <input type="date" name="dateBooking" th:onchange="selectTime()" id="timeBooking">
+                                <div class="row">
+
+                                    <label>Khung giờ trống</label>
+                                    <div data-toggle="buttons">
+                                        <div class="row" id="getTimeAndPrice">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-count">
+                                    <div class="product-count">
+
+                                        <button type="submit" onclick="submitForm()" class="round-black-btn"
+                                                value="Đặt sân">Đặt sân
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                            <script>
+                                function submitForm() {
+                                    jQuery('#booking-form')[0].submit()
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info-tabs">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description"
+                               role="tab" aria-controls="description" aria-selected="true">Mô tả sân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                               aria-controls="review" aria-selected="false">Đánh giá</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade " id="description" role="tabpanel"
+                             aria-labelledby="description-tab">
+                            <p th:text="'Dịch vụ: '+${ownPitch.getService()}"></p>
+                        </div>
+                        <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                            <div class="review-heading">Đánh giá</div>
+                            <form id="review-form" class="review-form" th:action="@{/postReview}" method="post">
+                                <div class="form-group">
+                                    <div class="reviews-counter">
+                                        <input hidden name="idOwnPitch"
+                                               th:value="${booking.getPriceYardID().getYardId().getOwnPitch().getId()}"/>
+                                        <input hidden name="idBooking" th:value="${booking.getId()}"/>
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rate" value="5"/>
+                                            <label for="star5"></label>
+                                            <input type="radio" id="star4" name="rate" value="4"/>
+                                            <label for="star4"></label>
+                                            <input type="radio" id="star3" name="rate" value="3"/>
+                                            <label for="star3"></label>
+                                            <input type="radio" id="star2" name="rate" value="2"/>
+                                            <label for="star2"></label>
+                                            <input type="radio" id="star1" name="rate" value="1"/>
+                                            <label for="star1"></label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Đánh giá của bạn</label>
+                                    <textarea name="content" class="form-control" rows="10"></textarea>
+                                </div>
+                                <button class="round-black-btn" onclick="submitForm1()" type="submit">Gửi đánh giá</button>
+                            </form>
+                            <script>
+                                function submitForm1() {
+                                    jQuery('#review-form')[0].submit()
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Counts Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" th:insert="footer.html"></footer>
+<!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script src="/vendor/purecounter/purecounter.js"></script>
+<script src="/vendor/aos/aos.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script>
+    var strUser = "";
+
+    function selectTime() {
+        var idyard = document.getElementById("yard").value;
+        var timeBooking = document.getElementById("timeBooking").value;
+        $.ajax('/getBooking/' + timeBooking + '/' + idyard,   // request url
+            {
+                success: function (data, status, xhr) {// success callback function
+                    console.log(data);
+                    if (data.length > 0) {
+                        $("#getTimeAndPrice").empty();
+                        data.map(p => $("#getTimeAndPrice").append(`
+                                            <div class="col-md-3" onclick="getPrice(${p.price})">
+                                                <label class="btn btn-block btn-outline-dark" >
+                                                    <input name="id" value="${p.id}" type="radio" checked autocomplete="off" style="display: none"  >${p.startTime} - ${p.endTime}
+                                                </label>
+                                            </div>
+                                            `))
+                    } else {
+                        getIdYard();
+                    }
+
+                }
+            });
+        ;
+    }
+
+    function getIdYard() {
+        var idyard = document.getElementById("yard").value;
+        $.ajax('/yard/getTime/' + idyard,   // request url
+            {
+                success: function (data, status, xhr) {// success callback function
+                    console.log(data);
+                    $("#getTimeAndPrice").empty();
+                    data.map(p => $("#getTimeAndPrice").append(`
+                                            <div class="col-md-3" onclick="getPrice(${p.price})">
+                                                <label class="btn btn-block btn-outline-dark" >
+                                                         <input name="id" value="${p.id}" type="radio" checked autocomplete="off" style="display: none"  >${p.startTime} - ${p.endTime}
+                                                </label>
+                                            </div>
+                                            `))
+                }
+            });
+
+        ;
+
+    };
+
+    $(document).ready(function () {
+        getIdYard();
+    })
+
+    function getPrice(value) {
+        var money = Math.floor(value / 1000) + 'K';
+        document.getElementById("price").innerText = "Giá: " + money + " VND";
+    }
+
+    function passValue() {
+        alert(1);
+    }
+</script>
+</body>
+</html>

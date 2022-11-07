@@ -1,0 +1,247 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>[TÌM ĐỐI] Bài đăng tìm đối của người dùng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAweome CDN Link for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- Favicons -->
+    <link href="/img/logo.jpg" rel="icon">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="vendor/aos/aos.css" rel="stylesheet">
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="/js/jquery.js"></script>
+</head>
+
+<body>
+<header id="header" th:insert="header.html"></header>
+
+
+<!-- ======= Details Section ======= -->
+<section>
+    <!--- \\\\\\\Post-->
+    <div class="card border-0" style="background-color: inherit;">
+        <form th:action="@{/postMatching}" method="post" id="post-form">
+            <div class="form-group">
+                <main id="main">
+                    <div class="container ">
+                        <!-- ======= Details Section ======= -->
+                        <section>
+                            <div class="btn-toolbar justify-content-between">
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" th:each="district : ${districtList}"
+                                       th:href="|/loadMatchByAdd?id=${district.getId()}|"
+                                       th:value="${district.id}"
+                                       th:text="${district.name}">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" th:each="district : ${districtList}"
+                                   th:href="|/loadMatchByAdd?id=${district.getId()}|"
+                                   th:value="${district.id}"
+                                   th:text="${district.name}">
+                                </a>
+                            </div>
+                            <!--- \\\\\\\Post-->
+                            <div class="card gedf-card mb-4 p-3 rounded " style="box-shadow: 0 0 1rem rgb(0 0 0 / 15%) !important ">
+                                <form th:action="@{/postMatching}" method="post" id="post-form">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="posts"
+                                                 role="tabpanel"
+                                                 aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="message">Đăng
+                                                        bài</label>
+                                                    <textarea class="form-control" id="message" rows="4"
+                                                              name="content"
+                                                              placeholder="Nội dung bài đăng..." required></textarea>
+                                                </div>
+                                                <!--<div class="custom-file">
+                                                    <input type="file" id="customFile">
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="btn-toolbar justify-content-between">
+                                            <div>
+                                                <select data-menu name="districtEntity" class="form-select">
+                                                    <option th:each="district : ${districtList}"
+                                                            th:value="${district.id}"
+                                                            th:text="${district.name}">
+                                                    </option>
+                                                </select><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group mx-3">
+                                        <button type="submit" onclick="submitFormPost()"
+                                                class="btn btn-primary">Đăng bài
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <script>
+                                function submitFormPost() {
+                                    let postElement = $('#message');
+                                    postElement.val(postElement.val().trim());
+                                    if(postElement.val() == ''){
+                                        showNotify("Bài đăng cần có nội dung!", "alert-danger");
+                                    }else{
+                                        jQuery('#post-form')[0].submit();
+                                    }
+                                }
+                            </script>
+                            <div class="container bg-white border border-light p-3 mt-5" style="box-shadow: 0 0 1rem rgb(0 0 0 / 15%) !important ">
+                                <!--- \\\\\\\Post-->
+                                <div class="card gedf-card my-5" th:each="post : ${postList}">
+                                    <!--- \\\\\\\Post-->
+                                    <div class="card gedf-card">
+                                        <div class="card-header">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="mr-2">
+                                                        <img class="" width="45" height="45"
+                                                             th:if="${post.getUserEntity().getImage() == null || post.getUserEntity().getImage() == ''}"
+                                                             src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                                             alt="">
+                                                        <img class="" width="45" height="45"
+                                                             th:if="${post.getUserEntity().getImage() != null && post.getUserEntity().getImage() != ''}"
+                                                             th:src="|@{upload/}*{post.getUserEntity().getImage()}|"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="ml-2">
+
+                                                        <div class="h5 m-0"
+                                                             th:text="${post.getUserEntity().getFullName()}"></div>
+                                                        <div class="h5 m-0"
+                                                        ><span th:text="${post.getUserEntity().getUsername()}"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i>
+                                                <i class='far fa-calendar-alt'></i><span class="mx-1" th:text="${post.getPublicationTime()}"></span>
+                                            </div>
+                                            <a class="card-link" style="color: royalblue">
+                                                <h5 class="card-title" th:text="${post.getContent()}"></h5>
+                                            </a>
+                                            <div>
+                                                            <span class="badge badge-primary"
+                                                                  th:text="${post.getDistrictEntity().name}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a type="button" class="card-link" data-toggle="reply-form"
+                                               data-target="comment-2-reply-form"><i
+                                                    class="fa fa-comment"></i> Bình luận</a>
+                                        </div>
+                                    </div>
+                                    <!-- Post /////-->
+                                </div>
+                            </div>
+                        </section><!-- End Counts Section -->
+                    </div>
+                </main>
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer id="footer" th:insert="footer.html"></footer>
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<script>
+    (function () {
+        if (document.getElementById("message-container") != undefined) {
+            // console.log("check");
+            $.ajax({
+                url: "/api/removeMessage",
+                type: "post",
+                success: function (data) {
+                    if (document.getElementById("message-container") != undefined) {
+                        document.getElementById("message-container").parentNode.removeChild(document.getElementById("message-container"));
+                    }
+                }
+            });
+        }
+    })();
+    function getListPostMatching() {
+        var idDistrict = document.getElementById("district").value;
+
+        $.ajax('/postMatching/' + idDistrict,   // request url
+            {
+                success: function (data, status, xhr) {// success callback function
+                    console.log(data);
+                    $("#getTimeAndPrice1").empty();
+                    data.postList.map(p => $("#getTimeAndPrice1").append(``))
+                }
+
+            });
+    }
+
+    $(document).ready(function () {
+        getListPostMatching()
+    })
+</script>
+
+<!-- Vendor JS Files -->
+<script src="vendor/purecounter/purecounter.js"></script>
+<script src="vendor/aos/aos.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/glightbox/js/glightbox.min.js"></script>
+<script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="vendor/waypoints/noframework.waypoints.js"></script>
+<script src="vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

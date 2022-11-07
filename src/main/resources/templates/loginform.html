@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.jpg">
+    <!-- CSS only -->
+    <script src="/js/notify.js"></script>
+</head>
+<body>
+<header id="header" style="height: 0 !important;"></header>
+<div class="parent clearfix">
+    <div class="bg-illustration">
+        <a href="/loadPage"><img src="img/logo.jpg" alt="logo"></a>
+        <div class="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="login">
+        <div class="container">
+            <h1 style="color: #ffc107">Đăng nhập</h1>
+            <br>
+            <h2>Chưa có tài khoản? <a th:href="|/loadFormRegister|">Đăng ký</a></h2>
+            <div class="login-form">
+                <form th:action="@{/login}" method="POST" autocomplete="off">
+                    <input onblur="this.value = this.value.trim()" oninput="this.value = this.value.trim()" onchange="this.value = this.value.trim()"  name="username" id="username" type="text" placeholder="Số điện thoại"
+                           required>
+                    <div class="form-group mb-4 position-relative">
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password cursor-pointer"></span>
+                        <input  name="password" id="password" type="password" class="form-control w-100 pr-5" placeholder="Mật khẩu" required>
+                    </div>
+                    <p style="color: red; margin: 15px 5px; font-style:italic;" th:if="${param.loginError}"
+                       th:text="'Sai mật khẩu hoặc số điện thoại'"></p>
+                    <script th:if="${param.loginError}">
+                        showNotify("Đăng nhập thất bại!", "alert-danger");
+                    </script>
+                    <!-- <div class="remember-form">
+                         <input type="checkbox">
+                         <span>Remember me</span>
+                     </div>-->
+                    <div class="forget-pass">
+                        <a th:href="|/loadFormforgotPassword|">Quên mật khẩu ?</a>
+                    </div>
+
+                    <button type="submit">Đăng nhập</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+</html>

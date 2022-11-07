@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>[TÀI KHOẢN] Quản lý thông tin tài khoản</title>
+    <link href="/img/logo.jpg" rel="icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--Bootstrap-->
+    <script src="/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <style>
+        .hover-opacity {
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: .25s;
+            border: 1px solid #7998ff;
+            color: #5580ff;
+            background-color: #f9f9ff;
+            padding: .5em 2.5em;
+        }
+
+        .hover-opacity:hover {
+            color: #ffffff;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+<!-- ======= Header ======= -->
+<header id="header" th:insert="header.html"></header>
+<!-- End Header -->
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Sidebar -->
+    <!-- End sidebar -->
+    <!-- Dark overlay -->
+    <div class="overlay"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Section 5 -->
+        <div class="section-5-container section-container mt-5 py-5" id="section-5">
+            <div class="container bootstrap snippet min-vh-5 p-5 rounded"
+                 style="background-color: #fff !important;box-shadow: 0 0 1rem rgb(0 0 0 / 15%) !important ">
+                <h2 id="form-title" class="text-center text-uppercase my-4">Thông tin tài khoản</h2>
+                <ul class="nav nav-tabs mb-4" role="tablist">
+                    <li class="nav-item">
+                        <a th:class="|nav-link ${tabActive == 'profile' ? 'active' : ''}|" href="#prof" role="tab" data-toggle="tab"
+                           onclick="$('#form-title').text('Thông tin tài khoản')">Tài
+                            khoản</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="|nav-link ${tabActive == 'history' ? 'active' : ''}|" href="#history" five role="tab" data-toggle="tab"
+                           onclick="$('#form-title').text('Lịch sử đặt sân')">Lịch
+                            đặt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="|nav-link ${tabActive == 'post' ? 'active' : ''}|" href="#post" role="tab" data-toggle="tab"
+                           onclick="$('#form-title').text('Bài viết đã đăng')">Bài viết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="|nav-link ${tabActive == 'password' ? 'active' : ''}|" href="#change-password" role="tab" data-toggle="tab"
+                           onclick="$('#form-title').text('Thay đổi mật khẩu')">Mật khẩu</a>
+                    </li>
+                </ul>
+                <div class="tab-content pt-5">
+                    <div id="prof" role="tabpanel" th:class="|tab-pane ${tabActive == 'profile' ? 'fade show active' : ''}|">
+                        <form id="form-profile" class="form" th:action="@{/updateProfileUser}" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="offset-sm-2 offset-sm-3 col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                    <div id="avatar-frame" class="text-center position-relative">
+                                        <img th:if="${userProfile.getImage() != null}"
+                                             th:src="|@{upload/}*{userProfile.getImage()}|"
+                                             class="avatar position-absolute image-circle image-thumbnail "
+                                             alt="avatar"/>
+                                        <img th:if="${userProfile.getImage() == null}"
+                                             src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                             class="avatar position-absolute image-circle image-thumbnail "
+                                             alt="avatar">
+                                        <label for="image-change">Sửa</label>
+                                        <span class="image-change-overlay"></span>
+                                        <input id="image-change" type="file"
+                                               name="avatar"
+                                               accept=".jpg,.png,.pdf"
+                                               class="text-center center-block file-upload">
+                                    </div>
+                                </div><!--/col-3-->
+                                <div class="form-group text-left offset-sm-2 offset-sm-3 col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="" style="height: 4.9em">
+                                        <label for="fullname"><h5 class="text-dark m-0">Họ Tên</h5></label>
+                                        <input id="fullname" type="text" class="form-control form-control-md"
+                                               th:value="${userProfile.getFullName()}"
+                                               name="fullName" />
+                                        <div class="input-error-message"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left offset-sm-2 offset-sm-3 col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="" style="height: 4.9em">
+                                        <label for="phone"><h5 class="text-dark m-0">Số điện thoại</h5></label>
+                                        <input type="text" class="form-control form-control-md "
+                                               name="phone"
+                                               id="phone"
+                                               th:value="${userProfile.getUsername()}"
+                                               readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-left offset-sm-2 offset-sm-3 col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="" style="height: 4.9em">
+                                        <label for="district"><h5 class="text-dark m-0">Quận/Huyện:</h5></label>
+                                        <select name="district" id="district" class="form-control form-control-md">
+
+                                            <option th:if="${userProfile.getDistrict()==NULL}"
+                                                    th:text="'Quận/Huyện'" selected="selected"
+                                                    disabled></option>
+                                            <option th:each="district : ${districtList}"
+                                                    th:value="${district.id}"
+                                                    th:text="${district.name}"
+                                                    th:selected="|${userProfile.district != null ? (district.id  == userProfile.district.id? 'selected' : 'false') : 'false'}|">
+                                            </option>
+                                        </select><br>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left offset-sm-2 offset-sm-3 col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                    <br>
+                                    <button id="profile-submit" class="btn hover-opacity" type="submit">
+                                        Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="history" role="tabpanel" th:class="|tab-pane ${tabActive == 'history' ? 'fade show active' : ''}|">
+                        <div class="table-responsive" style="min-height: 25vh; max-height: 65vh; overflow-x: auto;">
+                            <table class="table table-borderless table-hover">
+                                <thead>
+                                <tr class="bg-light small">
+                                    <th scope="col" width="20%" class="text-center">Tên sân bóng</th>
+                                    <th scope="col" width="15%" class="text-center">Ngày đặt</th>
+                                    <th scope="col" width="20%" class="text-center">Khung giờ đặt</th>
+                                    <th scope="col" width="10%" class="text-center">Vị trí sân</th>
+                                    <th scope="col" width="10%" class="text-center">Giá tiền</th>
+                                    <th scope="col" width="15%" class="text-center">Trạng thái</th>
+                                    <th scope="col" width="10%" class="text-center"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="cursor-pointer small" th:each="booking : ${bookingList}">
+                                    <td class="py-4 text-center"
+                                        th:text="${booking.getPriceYardID().getYardId().getOwnPitch().getNamePitch()}"></td>
+                                    <td class="py-4 text-center" th:text="${booking.getDateBooking()}"></td>
+                                    <td class="py-4 text-center"
+                                        th:text="${booking.getPriceYardID().getStartTime()}+'-'+${booking.getPriceYardID().getEndTime()}"></td>
+                                    <td class="py-4 text-center"
+                                        th:text="${booking.getPriceYardID().getYardId().getName()}"></td>
+                                    <td class="py-4 text-left"
+                                        th:text="${booking.getPriceYardID().getPrice()}"></td>
+                                    <td class="py-4 text-center" th:switch="${booking.getStatus()}">
+                                        <i th:case="TRUE" class="far fa-dot-circle small text-success"></i>
+                                        <i th:case="false" class="far fa-dot-circle small text-danger"></i><span
+                                            class="ms-1"
+                                            th:text="${booking.getStatus() ? 'Đã thanh toán' : 'Đã hủy'}"></span>
+                                    </td>
+
+                                    <td class="py-4 text-center">
+                                        <a type="button"
+                                           th:if="${booking.getIsReview() != true && booking.getStatus()}"
+                                           class="btn btn-primary"
+                                           th:href="|/showFormReview?id=${booking.getId()}|"
+                                           data-target="#exampleModal">
+                                            Đánh giá
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div id="post" role="tabpanel" th:class="|tab-pane ${tabActive == 'post' ? 'fade show active' : ''}|">
+                        <div class="table-responsive" style="min-height: 25vh; max-height: 65vh; overflow-x: auto;">
+                            <table class="table table-borderless table-hover">
+                                <thead>
+                                <tr class="bg-light small">
+                                    <th scope="col" width="25%" class="text-center">Địa chỉ</th>
+                                    <th scope="col" width="25%" class="text-center">Bài viết</th>
+                                    <th scope="col" width="25%" class="text-center">Ngày đăng</th>
+                                    <th scope="col" width="25%" class="text-center"></th>
+                                    <!-- <th scope="col"></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="post : ${postList}" class="cursor-pointer small">
+                                    <td th:text="${post.getDistrictEntity().name}" class="py-4 text-center"></td>
+                                    <td th:text="${post.getContent()}" class="py-4 text-center"></td>
+                                    <td th:text="${post.getPublicationTime()}" class="py-4 text-center"></td>
+                                    <td class="py-4 text-center">
+                                        <a th:href="|/deletePost?id=${post.getId()}|"
+                                           class="tm-product-delete-link"
+                                           onclick="if (!confirm('Bạn có muốn xóa')) { return false }">
+                                            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                        </a>
+                                    </td>
+                                    <!--<td>
+                                        <a href="#" class="tm-product-delete-link">
+                                            <i class="far fa-edit tm-product-img-edit"></i>
+                                        </a>
+                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="change-password" role="tabpanel" th:class="|tab-pane ${tabActive == 'password' ? 'fade show active' : ''}|">
+                        <div class="col-md-6 offset-md-3 mb-5" style="min-height: 25vh">
+                            <form id="form-password" class="form" role="form" autocomplete="off">
+                                <div class="form-group mt-5 d-flex flex-column justify-content-center align-items-center">
+                                    <label class="d-inline-block text-secondary w-75 small">Mã OTP sẽ được gửi tới
+                                        số
+                                        điện thoại đăng ký tài khoản thông qua tin nhắn SMS:</label>
+                                    <div sec:authentication='name' class="px-3 py-2  border rounded bg-light w-75"
+                                         style="box-shadow: inset 0 0 4px #dbdbdb;"></div>
+                                    <div class="w-75 my-5">
+                                        <a for="inputPasswordOld" class="btn btn-custom"
+                                           th:href="|/sendOTPChangePassword|">
+                                            <span>Gửi mã OTP <span class="fa fa-arrow-circle-right "></span></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section 1 -->
+    <!-- Section 3 -->
+</div>
+<!-- End content -->
+
+<!-- Footer -->
+<footer id="footer" th:insert="footer.html"></footer>
+<!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!-- Javascript -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/jquery.backstretch.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/js/scripts.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    (function () {
+        if (document.getElementById("message-container") != undefined) {
+            $.ajax({
+                url: "/api/removeMessage",
+                type: "post",
+                success: function (data) {
+                    if (document.getElementById("message-container") != undefined) {
+                        document.getElementById("message-container").parentNode.removeChild(document.getElementById("message-container"));
+                    }
+                }
+            });
+        }
+    })();
+
+    Validator({
+        form: '#form-profile',
+        rules: [
+            Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ của bạn.'),
+            Validator.isName('#fullname', 'Tên không hợp lệ.'),
+            Validator.isRequired('#email', 'Vui lòng nhập địa chỉ email của bạn.'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại liên lạc của bạn.'),
+            Validator.isPhone('#phone', 'Số điện thoại không hợp lệ.'),
+            Validator.isRequired('#address', 'Địa chỉ không được để trống.'),
+            Validator.isRequired('#birthdate', 'Vui lòng nhập ngày sinh của bạn.'),
+        ]
+    });
+
+    Validator({
+        form: '#form-password',
+        rules: [
+            Validator.isRequired('#inputPasswordOld', 'Vui lòng nhập mật khẩu hiện tại.'),
+            Validator.isRequired('#inputPasswordNew', 'Vui lòng nhập mật khẩu mới.'),
+            Validator.isPassword('#inputPasswordNew', 'Mật khẩu không hợp lệ. Độ dài 6-20 ký tự và có chứa chữ hoa, chữ thường và số.'),
+            Validator.isRequired('#inputPasswordNewVerify', 'Vui lòng nhập lại mật khẩu mới.'),
+            Validator.isMatch('#inputPasswordNewVerify', function () {
+                return $('#form-password #inputPasswordNew').val();
+            }, 'Mật khẩu xác nhận không trùng khớp.')
+        ]
+    });
+
+    isDistrict({})
+</script>
+</body>
+</html>
